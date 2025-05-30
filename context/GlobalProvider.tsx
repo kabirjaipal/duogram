@@ -4,16 +4,16 @@ import {
   getRelationship,
 } from "@/lib/appwrite";
 import { Relationship, User } from "@/types";
+import * as SplashScreen from "expo-splash-screen";
 import React, {
   createContext,
+  ReactNode,
+  useCallback,
   useContext,
   useEffect,
-  useState,
-  ReactNode,
   useMemo,
-  useCallback,
+  useState,
 } from "react";
-import * as SplashScreen from "expo-splash-screen";
 
 interface GlobalContextProps {
   isLogged: boolean;
@@ -81,7 +81,7 @@ const GlobalProvider: React.FC<GlobalProviderProps> = ({ children }) => {
 
   useEffect(() => {
     fetchUser();
-  }, [fetchUser, !user, !relationship, !partner]);
+  }, [fetchUser]);
 
   const contextValue = useMemo(
     () => ({

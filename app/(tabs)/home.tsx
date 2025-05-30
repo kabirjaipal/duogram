@@ -11,7 +11,7 @@ import { updatePartnerInfo } from "@/lib/appwrite";
 import { UserDataInterface } from "@/types";
 import { StatusBar } from "expo-status-bar";
 import React, { useCallback, useEffect, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const Home: React.FC = () => {
@@ -96,7 +96,6 @@ const Home: React.FC = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{ height: 32, backgroundColor: "#000" }} />
       <StatusBar style="light" />
       <DaysInRelationship />
       {locationData ? (

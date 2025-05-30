@@ -1,4 +1,3 @@
-import { isExpoGo } from "@/lib/expoHelpers";
 import * as Location from "expo-location";
 import * as MediaLibrary from "expo-media-library";
 import { useRouter } from "expo-router";
@@ -61,22 +60,14 @@ const usePermissions = () => {
           storage: storageStatus === "granted",
         });
         // Redirect if any required permissions are missing
-        // Handle differently for Expo Go vs development builds
-        if (isExpoGo()) {
-          // In Expo Go, we only require location permissions since others have limitations
-          if (foregroundLocationStatus !== "granted") {
-            promptToEnablePermissions();
-          }
-        } else {
-          // In development builds, we require all permissions
-          if (
-            foregroundLocationStatus !== "granted" ||
-            backgroundLocationStatus !== "granted" ||
-            storageStatus !== "granted"
-          ) {
-            // Open app settings to force the user to enable permissions
-            promptToEnablePermissions();
-          }
+        // In development builds, we require all permissions
+        if (
+          foregroundLocationStatus !== "granted" ||
+          backgroundLocationStatus !== "granted" ||
+          storageStatus !== "granted"
+        ) {
+          // Open app settings to force the user to enable permissions
+          promptToEnablePermissions();
         }
       } catch (error) {
         console.error("Error checking permissions:", error);

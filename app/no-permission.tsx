@@ -1,6 +1,5 @@
 import { useThemeContext } from "@/context/ThemeContext";
 import appConfig from "@/lib/appConfig";
-import { isExpoGo } from "@/lib/expoHelpers";
 import * as Location from "expo-location";
 import * as MediaLibrary from "expo-media-library";
 import { useRouter } from "expo-router";
@@ -11,7 +10,7 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
 } from "react-native";
 
 const PermissionsScreen: React.FC = () => {
@@ -26,14 +25,8 @@ const PermissionsScreen: React.FC = () => {
     location: boolean;
     storage: boolean;
   }) => {
-    if (isExpoGo()) {
-      if (updatedPermissions.location) {
-        router.push("/home");
-      }
-    } else {
-      if (updatedPermissions.location && updatedPermissions.storage) {
-        router.push("/home");
-      }
+    if (updatedPermissions.location && updatedPermissions.storage) {
+      router.push("/home");
     }
   };
 
