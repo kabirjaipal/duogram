@@ -3,25 +3,26 @@ import HomeInfo from "@/components/HomeInfo";
 import HomeMap from "@/components/HomeMap";
 import Loading from "@/components/Loading";
 import { useGlobalContext } from "@/context/GlobalProvider";
+import { useThemeContext } from "@/context/ThemeContext";
 import useBattery from "@/hooks/useBattery";
 import useDeviceInfo from "@/hooks/useDeviceInfo";
 import useLocation from "@/hooks/useLocation";
 import usePermissions from "@/hooks/usePermissions";
 import { updatePartnerInfo } from "@/lib/appwrite";
 import { UserDataInterface } from "@/types";
-import { StatusBar } from "expo-status-bar";
 import React, { useCallback, useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const Home: React.FC = () => {
   const { user, partner } = useGlobalContext();
+  const { theme } = useThemeContext();
   const permissionStatus = usePermissions();
   const locationData = useLocation(permissionStatus.location === true);
   const batteryData = useBattery();
   const deviceInfo = useDeviceInfo();
   const [selectedUsername, setSelectedUsername] = useState<string | null>(
-    user?.username || null
+    partner?.username || user?.username || null
   );
   const [markerUsers, setMarkerUsers] = useState<any[]>([]);
   const [currentUserData, setCurrentUserData] =
@@ -95,8 +96,9 @@ const Home: React.FC = () => {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar style="light" />
+    <SafeAreaView
+      style={[styles.container, { backgroundColor: theme.primaryColor }]}
+    >
       <DaysInRelationship />
       {locationData ? (
         <HomeMap
