@@ -1,14 +1,3 @@
-import React, { useState } from "react";
-import {
-  Text,
-  View,
-  Image,
-  ScrollView,
-  Modal,
-  StyleSheet,
-  ImageBackground,
-} from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { useGlobalContext } from "@/context/GlobalProvider";
 import { useThemeContext } from "@/context/ThemeContext";
 import {
@@ -17,8 +6,18 @@ import {
   getNextAnniversary,
 } from "@/lib/functions";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import Section from "../../components/RelationshipSection";
+import React, { useState } from "react";
+import {
+  Image,
+  Modal,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View
+} from "react-native";
 import Card from "../../components/RelationshipCard";
+import Section from "../../components/RelationshipSection";
 
 const Relationship: React.FC = () => {
   const { user, partner, relationship } = useGlobalContext();

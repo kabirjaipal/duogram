@@ -11,8 +11,7 @@ import usePermissions from "@/hooks/usePermissions";
 import { updatePartnerInfo } from "@/lib/appwrite";
 import { UserDataInterface } from "@/types";
 import React, { useCallback, useEffect, useState } from "react";
-import { StyleSheet } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaView, StyleSheet } from "react-native";
 
 const Home: React.FC = () => {
   const { user, partner } = useGlobalContext();
@@ -21,9 +20,7 @@ const Home: React.FC = () => {
   const locationData = useLocation(permissionStatus.location === true);
   const batteryData = useBattery();
   const deviceInfo = useDeviceInfo();
-  const [selectedUsername, setSelectedUsername] = useState<string | null>(
-    partner?.username || user?.username || null
-  );
+  const [selectedUsername, setSelectedUsername] = useState<string | null>(null);
   const [markerUsers, setMarkerUsers] = useState<any[]>([]);
   const [currentUserData, setCurrentUserData] =
     useState<UserDataInterface | null>(null);
@@ -53,6 +50,7 @@ const Home: React.FC = () => {
           },
         },
       ]);
+      setSelectedUsername(partner.username);
     }
   }, [user, partner, locationData.location]);
 

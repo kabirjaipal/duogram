@@ -1,19 +1,19 @@
+import ThemeSelector from "@/components/ThemeSelector";
+import { useGlobalContext } from "@/context/GlobalProvider";
+import { useThemeContext } from "@/context/ThemeContext";
+import { signOut } from "@/lib/appwrite";
+import { Theme } from "@/types";
+import { router } from "expo-router";
 import React, { useCallback, useMemo } from "react";
 import {
+  Image,
+  SafeAreaView,
+  ScrollView,
   StyleSheet,
   Text,
-  View,
-  Image,
   TouchableOpacity,
-  ScrollView,
+  View,
 } from "react-native";
-import { signOut } from "@/lib/appwrite";
-import { useGlobalContext } from "@/context/GlobalProvider";
-import { router } from "expo-router";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { useThemeContext } from "@/context/ThemeContext";
-import ThemeSelector from "@/components/ThemeSelector";
-import { Theme } from "@/types";
 
 const settings = [
   { label: "Notification Settings" },

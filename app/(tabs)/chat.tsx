@@ -20,6 +20,7 @@ import {
   Alert,
   Clipboard,
   FlatList,
+  SafeAreaView,
   StatusBar,
   StyleSheet,
   Text,
@@ -28,7 +29,6 @@ import {
   View,
 } from "react-native";
 import { ID, Query } from "react-native-appwrite";
-import { SafeAreaView } from "react-native-safe-area-context";
 import EmojiPicker from "rn-emoji-picker";
 import { emojis } from "rn-emoji-picker/dist/data";
 import { Emoji } from "rn-emoji-picker/dist/interfaces";

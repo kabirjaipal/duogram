@@ -1,18 +1,18 @@
-import React, { useMemo, useEffect, useRef, useState } from "react";
+import Loading from "@/components/Loading";
+import { useGlobalContext } from "@/context/GlobalProvider";
+import { useThemeContext } from "@/context/ThemeContext";
+import appConfig from "@/lib/appConfig";
+import { FontAwesome6 } from "@expo/vector-icons";
+import { router } from "expo-router";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
+  ImageBackground,
+  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
-  ImageBackground,
-  ScrollView,
 } from "react-native";
-import { FontAwesome6 } from "@expo/vector-icons";
-import { router } from "expo-router";
-import { useThemeContext } from "@/context/ThemeContext";
-import { useGlobalContext } from "@/context/GlobalProvider";
-import Loading from "@/components/Loading";
-import appConfig from "@/lib/appConfig";
 
 const backgroundImageUri =
   "https://i.pinimg.com/564x/c4/66/b8/c466b8f78feee4a4dde934d82b04cda7.jpg";

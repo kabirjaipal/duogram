@@ -1,23 +1,23 @@
-import React, { useRef, useEffect, useState } from "react";
+import { useGlobalContext } from "@/context/GlobalProvider";
+import { useThemeContext } from "@/context/ThemeContext";
+import { calculateDistance, calculateMidpoint } from "@/lib/functions";
+import { Ionicons } from "@expo/vector-icons";
+import React, { useEffect, useRef, useState } from "react";
 import {
+  Alert,
+  Image,
   StyleSheet,
   Text,
-  View,
-  Image,
   TouchableOpacity,
-  Alert,
+  View,
 } from "react-native";
 import MapView, {
+  Callout,
+  MapPressEvent,
   Marker,
   Polyline,
   PROVIDER_GOOGLE,
-  Callout,
-  MapPressEvent,
 } from "react-native-maps";
-import { Ionicons } from "@expo/vector-icons";
-import { useThemeContext } from "@/context/ThemeContext";
-import { calculateDistance, calculateMidpoint } from "@/lib/functions";
-import { useGlobalContext } from "@/context/GlobalProvider";
 import Loading from "./Loading";
 
 interface User {

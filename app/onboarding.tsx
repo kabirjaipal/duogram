@@ -2,23 +2,23 @@ import { useGlobalContext } from "@/context/GlobalProvider";
 import { useThemeContext } from "@/context/ThemeContext";
 import appConfig from "@/lib/appConfig";
 import {
-    createRelationship,
-    joinRelationship
+  createRelationship,
+  joinRelationship
 } from "@/lib/appwrite";
 import { generateDefaultCode } from "@/lib/functions";
 import { router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useState } from "react";
 import {
-    Alert,
-    ImageBackground,
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
+  Alert,
+  ImageBackground,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 const backgroundImageUri =
   "https://i.pinimg.com/564x/01/b2/cf/01b2cf85cc9b992d0c3180f4e77e9a0f.jpg";

@@ -1,7 +1,6 @@
-import { ActivityIndicator, StyleSheet, Text } from "react-native";
-import React from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { useThemeContext } from "@/context/ThemeContext";
+import React from "react";
+import { ActivityIndicator, SafeAreaView, StyleSheet, Text } from "react-native";
 
 const Loading = () => {
   const { theme } = useThemeContext();

@@ -1,8 +1,7 @@
-import React from "react";
-import { StyleSheet } from "react-native";
-import { Tabs } from "expo-router";
-import { Ionicons } from "@expo/vector-icons";
 import { useThemeContext } from "@/context/ThemeContext";
+import { Ionicons } from "@expo/vector-icons";
+import { Tabs } from "expo-router";
+import React from "react";
 
 // Memoized TabIcon component to optimize rendering
 const TabIcon: React.FC<{ name: any; color: string; size: number }> =
@@ -21,9 +20,8 @@ const TabsLayout: React.FC = React.memo(() => {
         tabBarStyle: {
           backgroundColor: theme.primaryColor,
           borderTopColor: theme.secondaryColor,
-          borderTopWidth: 1,
+          borderTopWidth: 0.5,
           paddingBottom: 5,
-          height: 60,
         },
         tabBarLabelStyle: {
           fontSize: 12,
