@@ -27,6 +27,8 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import { ID, Query } from "react-native-appwrite";
 import EmojiPicker from "rn-emoji-picker";
@@ -346,125 +348,131 @@ const Chat: React.FC = () => {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={{ height: 32, backgroundColor: '#36393f' }} />
-      <StatusBar barStyle="light-content" />
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      keyboardVerticalOffset={0}
+    >
       <View style={styles.container}>
-        {messages.length === 0 && (
-          <EmptyBanner user={user} partner={partner} theme={theme} />
-        )}
-        <FlatList
-          ref={flatListRef}
-          data={messages}
-          renderItem={({ item }) => (
-            <TouchableOpacity onLongPress={() => handleLongPress(item)}>
-              <MessageItem
-                item={item}
-                onReplyPress={handleReplyPress}
-                replyToMessage={
-                  messages.find((msg) => msg.$id === item.replyTo)!
-                }
-              />
-            </TouchableOpacity>
+        <View style={{ height: 32, backgroundColor: '#36393f' }} />
+        <StatusBar barStyle="light-content" />
+        <View style={styles.container}>
+          {messages.length === 0 && (
+            <EmptyBanner user={user} partner={partner} theme={theme} />
           )}
-          keyExtractor={(item) => item.$id}
-          style={styles.messagesList}
-          inverted
-          initialNumToRender={10}
-          maxToRenderPerBatch={5}
-          onEndReached={loadMoreMessages}
-          onEndReachedThreshold={0.1}
-          ListFooterComponent={
-            loadingMore && hasMoreMessages ? <Loading /> : null
-          }
-          getItemLayout={getItemLayout}
-        />
-        {replyToMessage && (
-          <View style={styles.replyContainer}>
-            <Text style={styles.replyLabel}>Replying to:</Text>
-            <Text style={styles.replyText}>
-              {isAttachment(getFileType(replyToMessage.contentType))
-                ? "📷 Attachment"
-                : replyToMessage.content}
-            </Text>
-            <TouchableOpacity onPress={() => setReplyToMessage(null)}>
-              <Text style={styles.cancelReply}>Cancel</Text>
+          <FlatList
+            ref={flatListRef}
+            data={messages}
+            renderItem={({ item }) => (
+              <TouchableOpacity onLongPress={() => handleLongPress(item)}>
+                <MessageItem
+                  item={item}
+                  onReplyPress={handleReplyPress}
+                  replyToMessage={
+                    messages.find((msg) => msg.$id === item.replyTo)!
+                  }
+                />
+              </TouchableOpacity>
+            )}
+            keyExtractor={(item) => item.$id}
+            style={styles.messagesList}
+            inverted
+            initialNumToRender={10}
+            maxToRenderPerBatch={5}
+            onEndReached={loadMoreMessages}
+            onEndReachedThreshold={0.1}
+            ListFooterComponent={
+              loadingMore && hasMoreMessages ? <Loading /> : null
+            }
+            getItemLayout={getItemLayout}
+          />
+          {replyToMessage && (
+            <View style={styles.replyContainer}>
+              <Text style={styles.replyLabel}>Replying to:</Text>
+              <Text style={styles.replyText}>
+                {isAttachment(getFileType(replyToMessage.contentType))
+                  ? "📷 Attachment"
+                  : replyToMessage.content}
+              </Text>
+              <TouchableOpacity onPress={() => setReplyToMessage(null)}>
+                <Text style={styles.cancelReply}>Cancel</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+
+          <View style={styles.inputContainer}>
+            <TouchableOpacity
+              onPress={openImagePicker}
+              style={styles.mediaButton}
+            >
+              <Ionicons name="image" size={18} color="#fff" />
+            </TouchableOpacity>
+            <TextInput
+              style={styles.textInput}
+              placeholder="Type a message"
+              value={inputText}
+              onChangeText={setInputText}
+              placeholderTextColor="#dcddde"
+              multiline={false}
+              returnKeyType="send"
+              onSubmitEditing={() => sendMessage()}
+              onSelectionChange={(event) =>
+                setCursorPosition(event.nativeEvent.selection.start)
+              }
+            />
+            <TouchableOpacity
+              onPress={() => setEmojiPickerOpen((prev) => !prev)}
+              style={styles.sendButton}
+            >
+              <Entypo name="emoji-happy" size={18} color="#fff" />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => setGifPickerOpen((prev) => !prev)}
+              style={styles.sendButton}
+            >
+              <MaterialIcons name="gif" size={18} color="#fff" />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => sendMessage()}
+              style={styles.sendButton}
+            >
+              <Ionicons name="send" size={18} color="#fff" />
             </TouchableOpacity>
           </View>
-        )}
-
-        <View style={styles.inputContainer}>
-          <TouchableOpacity
-            onPress={openImagePicker}
-            style={styles.mediaButton}
-          >
-            <Ionicons name="image" size={18} color="#fff" />
-          </TouchableOpacity>
-          <TextInput
-            style={styles.textInput}
-            placeholder="Type a message"
-            value={inputText}
-            onChangeText={setInputText}
-            placeholderTextColor="#dcddde"
-            multiline={false}
-            returnKeyType="send"
-            onSubmitEditing={() => sendMessage()}
-            onSelectionChange={(event) =>
-              setCursorPosition(event.nativeEvent.selection.start)
-            }
-          />
-          <TouchableOpacity
-            onPress={() => setEmojiPickerOpen((prev) => !prev)}
-            style={styles.sendButton}
-          >
-            <Entypo name="emoji-happy" size={18} color="#fff" />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => setGifPickerOpen((prev) => !prev)}
-            style={styles.sendButton}
-          >
-            <MaterialIcons name="gif" size={18} color="#fff" />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => sendMessage()}
-            style={styles.sendButton}
-          >
-            <Ionicons name="send" size={18} color="#fff" />
-          </TouchableOpacity>
         </View>
+        <MessageModal
+          visible={modalVisible}
+          onClose={() => setModalVisible(false)}
+          onEdit={handleEdit}
+          onReply={handleReply}
+          onCopy={handleCopy}
+          onDelete={handleDelete}
+        />
+        {gifPickerOpen && (
+          <GifPicker
+            onGifSelect={(gifUrl) => {
+              setGifPickerOpen(false);
+              sendMessage(gifUrl, "gif");
+            }}
+            onClose={() => setGifPickerOpen(false)}
+          />
+        )}
+        {emojiPickerOpen && (
+          <EmojiPicker
+            emojis={emojis}
+            recent={recentEmoji}
+            autoFocus={false}
+            loading={false}
+            darkMode={true}
+            perLine={7}
+            onSelect={handleEmojiSelect}
+            onChangeRecent={setRecentEmoji}
+            backgroundColor="#36393f"
+            key={recentEmoji.length}
+          />
+        )}
       </View>
-      <MessageModal
-        visible={modalVisible}
-        onClose={() => setModalVisible(false)}
-        onEdit={handleEdit}
-        onReply={handleReply}
-        onCopy={handleCopy}
-        onDelete={handleDelete}
-      />
-      {gifPickerOpen && (
-        <GifPicker
-          onGifSelect={(gifUrl) => {
-            setGifPickerOpen(false);
-            sendMessage(gifUrl, "gif");
-          }}
-          onClose={() => setGifPickerOpen(false)}
-        />
-      )}
-      {emojiPickerOpen && (
-        <EmojiPicker
-          emojis={emojis}
-          recent={recentEmoji}
-          autoFocus={false}
-          loading={false}
-          darkMode={true}
-          perLine={7}
-          onSelect={handleEmojiSelect}
-          onChangeRecent={setRecentEmoji}
-          backgroundColor="#36393f"
-          key={recentEmoji.length}
-        />
-      )}
-    </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 };
 
