@@ -1,50 +1,91 @@
-# Welcome to your Expo app 👋
+# 💙 Duogram
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A beautiful, privacy-focused relationship app for couples. Connect, chat, share moments, and celebrate your journey together!
 
-## Get started
+---
 
-1. Install dependencies
+<p align="center">
+  <img src="https://img.shields.io/github/stars/kabirjaipal/duogram?style=social" alt="GitHub stars" />
+  <img src="https://img.shields.io/github/issues/kabirjaipal/duogram" alt="GitHub issues" />
+  <img src="https://img.shields.io/github/license/kabirjaipal/duogram" alt="License" />
+  <img src="https://img.shields.io/badge/Expo-53.0.20-blue" alt="Expo version" />
+</p>
 
-   ```bash
-   npm install
-   ```
+---
 
-2. Start the app
+## ✨ Features
 
-   ```bash
-   npx expo start
-   ```
+- **Secure Authentication**: Register and log in with Appwrite backend.
+- **Relationship Onboarding**: Create or join a relationship with a unique code.
+- **Home Dashboard**: See relationship milestones, days together, and partner info.
+- **Real-time Chat**: Private messaging between partners.
+- **Location & Device Info**: Share location and device stats (with permission).
+- **Custom Themes**: Choose your favorite look (light/blue by default).
+- **Privacy First**: Your data is secure and only shared with your partner.
 
-In the output, you'll find options to open the app in a
+---
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## 🚀 Getting Started
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
+### 1. Clone the repository
 ```bash
-npm run reset-project
+git clone https://github.com/kabirjaipal/duogram.git
+cd duogram
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### 2. Install dependencies
+```bash
+npm install
+```
 
-## Learn more
+### 3. Start the app
+```bash
+npx expo start
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+- Open in Expo Go, Android/iOS simulator, or web browser.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+---
 
-## Join the community
+## 🛠️ Tech Stack
+- **Expo + React Native**
+- **Expo Router** (file-based navigation)
+- **Appwrite** (auth, database, storage)
+- **Custom Hooks & Context** (state, theme, permissions)
+- **TypeScript**
 
-Join our community of developers creating universal apps.
+---
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## 🧩 Project Structure
+
+```
+app/           # Screens & navigation (file-based routing)
+components/    # Reusable UI components
+context/       # Global and theme context providers
+hooks/         # Custom React hooks (battery, location, etc.)
+lib/           # Appwrite integration, config, utilities
+types/         # TypeScript types
+assets/        # Images, fonts, icons
+```
+
+---
+
+## 📝 Contributing
+
+Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
+
+---
+
+## 📄 License
+
+[MIT](LICENSE)
+
+---
+
+## 💡 Inspiration
+
+Duogram is designed to help couples stay connected, celebrate their journey, and build memories together—securely and beautifully.
+
+---
+
+<p align="center"><b>Made with 💙 for couples everywhere.</b></p>
